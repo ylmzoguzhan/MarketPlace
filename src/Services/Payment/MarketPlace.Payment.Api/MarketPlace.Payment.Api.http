@@ -1,0 +1,6 @@
+@MarketPlace.Payment.Api_HostAddress = http://localhost:5037
+
+GET {{MarketPlace.Payment.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

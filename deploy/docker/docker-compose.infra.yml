@@ -1,0 +1,30 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    ports: [ "5432:5432" ]
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - ./init-databases.sql:/docker-entrypoint-initdb.d/init.sql
+      - pgdata:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    ports: [ "5672:5672", "15672:15672" ]
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  redis:
+    image: redis:7-alpine
+    ports: [ "6379:6379" ]
+
+  seq:
+    image: datalust/seq:latest
+    ports: [ "5341:5341", "8081:80" ]
+    environment:
+      ACCEPT_EULA: "Y"
+      SEQ_FIRSTRUN_NOAUTHENTICATION: "true"
+
+volumes:
+  pgdata:
